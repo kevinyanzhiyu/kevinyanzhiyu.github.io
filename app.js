@@ -20,7 +20,7 @@ const shelterScreens = [
 ].map((screen, index) => ({ ...screen, image: screen.image || `assets/projects/shelter/state-${String(index + 1).padStart(2, "0")}.webp` })).filter(screen => screen.label !== "PROGRESSION ENTRY");
 
 const projects = [
-{ id: "shelter-check", group: "system", title: "Shelter Check模拟经营玩法", product: "Shelter Check", image: "assets/projects/shelter/all-states.jpg", cover: "assets/projects/shelter/cover.webp", banner: "assets/projects/shelter/cover.webp", video: "assets/videos/shelter-check-demo-fixed.mp4", videoStream: "assets/videos/shelter-hd/index.m3u8", demoFirst: true, screens: shelterScreens, alt: "Shelter Check模拟经营玩法全状态汇总", summary: "负责 SLG 前期的避难所模拟经营体验：通过摇杆移动串联难民收纳、治疗与建设养成，再由工作人员自动化逐步衔接 SLG 玩法。", overview: "我负责这款 SLG 前期的避难所模拟经营玩法，涵盖难民收纳与避难所养成。玩家主要通过滑动摇杆移动，利用手中的资源完成升级建设、治疗与前台接诊，无需频繁点击。随着经营资金积累，玩家可雇佣其他工作人员，逐步形成自动化，并慢慢转向后续 SLG 玩法。", challenge: "核心设计问题是让玩家通过移动理解经营循环：找到交互点、判断所需物品、前往仓库补货，再投入资源完成工作。同时让任务切换、建设成长与雇佣自动化逐步展开，帮助玩家从亲手经营过渡到后续 SLG。", flow: [{ title: "摇杆移动 · 接诊收纳", note: "移动至前台交互点，接诊并收纳难民。" }, { title: "仓库取货 · 场景补给", note: "识别缺少的物品，取货后返回对应交互点。" }, { title: "治疗照料 · 建设升级", note: "投入携带资源，完成治疗与避难所养成。" }, { title: "积累资金 · 雇佣员工", note: "逐步雇佣工作人员，形成自动化经营。" }, { title: "经营成长 · 衔接 SLG", note: "从亲手经营逐步过渡到后续 SLG 玩法。" }], decisions: [
+{ id: "shelter-check", group: "system", title: "Shelter Check模拟经营玩法", product: "Shelter Check", image: "assets/projects/shelter/all-states.jpg", cover: "assets/projects/shelter/cover.webp", banner: "assets/projects/shelter/cover-original.png", video: "assets/videos/shelter-check-demo-fixed.mp4", videoStream: "assets/videos/shelter-hd/index.m3u8", demoFirst: true, screens: shelterScreens, alt: "Shelter Check模拟经营玩法全状态汇总", summary: "负责 SLG 前期的避难所模拟经营体验：通过摇杆移动串联难民收纳、治疗与建设养成，再由工作人员自动化逐步衔接 SLG 玩法。", overview: "我负责这款 SLG 前期的避难所模拟经营玩法，涵盖难民收纳与避难所养成。玩家主要通过滑动摇杆移动，利用手中的资源完成升级建设、治疗与前台接诊，无需频繁点击。随着经营资金积累，玩家可雇佣其他工作人员，逐步形成自动化，并慢慢转向后续 SLG 玩法。", challenge: "核心设计问题是让玩家通过移动理解经营循环：找到交互点、判断所需物品、前往仓库补货，再投入资源完成工作。同时让任务切换、建设成长与雇佣自动化逐步展开，帮助玩家从亲手经营过渡到后续 SLG。", flow: [{ title: "摇杆移动 · 接诊收纳", note: "移动至前台交互点，接诊并收纳难民。" }, { title: "仓库取货 · 场景补给", note: "识别缺少的物品，取货后返回对应交互点。" }, { title: "治疗照料 · 建设升级", note: "投入携带资源，完成治疗与避难所养成。" }, { title: "积累资金 · 雇佣员工", note: "逐步雇佣工作人员，形成自动化经营。" }, { title: "经营成长 · 衔接 SLG", note: "从亲手经营逐步过渡到后续 SLG 玩法。" }], decisions: [
     { title: "用移动串联经营操作", text: "玩家主要通过滑动摇杆移动，在场景交互点完成资源投入、治疗与前台接诊，减少反复点击，让操作沿着角色的行动路线连续发生。" },
     { title: "缺什么、去哪补，在现场说清楚", text: "地面圆圈标明交互位置，物品缺失图标提示前往仓库补货；资源需求、工作进度与收获反馈贴近对应事件，帮助玩家判断下一步行动。" },
     { title: "从亲手经营走向自动化", text: "早期亲自接诊、治疗并投入资源建设避难所；随着资金积累雇佣工作人员，逐步形成自动化经营，再衔接后续 SLG 玩法。任务完成时用短暂绿色反馈确认进展，并及时切换下一目标。" }
@@ -386,7 +386,7 @@ async function openProject(project, source) {
   near(overviewMedia,()=>{overviewImage.src=project.image;});
   const video=dialog.querySelector('#case-video');
   if(project.video)near(dialog.querySelector('#case-video-section'),()=>{window.CaseVideo.attach(video,project);});
-  const full=new Image();full.decoding='async';full.src=project.cover||project.image;
+  const full=new Image();full.decoding='async';full.src=project.banner||project.cover||project.image;
   full.decode().then(()=>{if(ticket===caseRevision&&dialog.open){art.querySelector('img').src=full.src;}}).catch(()=>{});
   window.PortfolioMedia?.observe(dialog);
 }
