@@ -30,8 +30,13 @@
     let active=0;
     sections.forEach((section,index)=>{if(section.getBoundingClientRect().top<=line)active=index;});
     if(pending>=0){
-      const arrived=Math.abs(sections[pending].getBoundingClientRect().top-(bottom+24))<40;
-      if(arrived||performance.now()>pendingUntil)pending=-1;else active=pending;
+      // While scrolling down, the arrival tolerance is reached before the
+      // next section crosses the scroll-spy line. Releasing here used to
+      // select the previous tab for a frame, then animate right a second time.
+      const target=pending;
+      const arrived=active===target&&Math.abs(sections[target].getBoundingClientRect().top-(bottom+24))<40;
+      active=target;
+      if(arrived||performance.now()>pendingUntil)pending=-1;
     }
     if(active!==current)select(active);
   }
