@@ -71,7 +71,7 @@ const projects = [
     { image: "assets/projects/cases/festival-04.webp", label: "MILESTONE", title: "每层大奖", note: "逐层展示关键奖励，让单次探索有短反馈，连续参与有长期目标。" },
     { image: "assets/projects/cases/festival-05.webp", label: "RECOVERY", title: "铲子不足状态", note: "主按钮切换为获取入口，并保留奖励信息，玩家无需离开上下文寻找资源。" }
   ], screenIntro: "五个状态共同完成一次“判断价值—投入资源—等待结果—继续推进”的抽奖体验。", tags: ["MOTION", "FEEDBACK"], role: "Game UX / Motion", platform: "Mobile", stage: "已上线" },
-  { id: "seven-day", group: "live-ops", title: "7日活动优化", product: "AGE OF APES", image: "assets/projects/seven-day.jpg", cover: "assets/projects/seven-day-cover.webp", banner: "assets/projects/seven-day-banner.webp", alt: "七日活动优化方案", summary: "重新组织七日任务、奖励节点和 VIP 价值提示，让进度与收益更容易理解。", overview: "这是对存量七日活动的结构优化。玩家按天完成任务并领取阶段奖励，同时在关键节点获得 VIP 道具。方案把零散邮件奖励改为活动内可见、可预期的成长路径。", challenge: "旧方案的奖励价值分散，玩家难以理解完成任务与 VIP 成长之间的关系。我在不增加页面复杂度的前提下，强化任务目标与奖励兑现的联系。", flow: ["进入活动查看当日任务", "完成任务积累进度", "领取任务与阶段奖励", "触发 VIP 道具说明", "前往 VIP 系统完成解锁"], decisions: [
+  { id: "seven-day", group: "live-ops", title: "7日活动优化", product: "AGE OF APES", image: "assets/projects/seven-day.jpg", cover: "assets/projects/seven-day-cover.webp", banner: "assets/projects/seven-day-banner-original.png", bannerPosition: "72% 0%", alt: "七日活动优化方案", summary: "重新组织七日任务、奖励节点和 VIP 价值提示，让进度与收益更容易理解。", overview: "这是对存量七日活动的结构优化。玩家按天完成任务并领取阶段奖励，同时在关键节点获得 VIP 道具。方案把零散邮件奖励改为活动内可见、可预期的成长路径。", challenge: "旧方案的奖励价值分散，玩家难以理解完成任务与 VIP 成长之间的关系。我在不增加页面复杂度的前提下，强化任务目标与奖励兑现的联系。", flow: ["进入活动查看当日任务", "完成任务积累进度", "领取任务与阶段奖励", "触发 VIP 道具说明", "前往 VIP 系统完成解锁"], decisions: [
     { title: "进度和奖励同屏对应", text: "顶部里程碑与下方任务卡形成清楚映射，玩家能同时看到当前进度、下一奖励和可执行任务。" },
     { title: "高价值奖励获得单独反馈", text: "VIP 道具使用气泡和奖励弹窗强调，避免与普通资源一起被快速忽略。" },
     { title: "未解锁时给出完整闭环", text: "奖励预览说明用途，并提供前往 VIP 页的明确入口，让奖励获得后立即有下一步。" }
@@ -352,6 +352,7 @@ function closeProject(fromHistory=false){
 function caseBanner(project,source){
   const banner=dialog.querySelector('.case-banner');
   let art=banner.querySelector('.case-banner-art');if(!art){art=document.createElement('div');art.className='case-banner-art';banner.prepend(art);}
+  art.style.setProperty('--case-banner-position',project.bannerPosition||'50% 50%');
   const cached=source?.querySelector('img');
   art.innerHTML=`<img src="${cached?.currentSrc||`assets/project-thumbs/${project.id}-960.webp`}" alt="${project.title}项目画面" decoding="async">`;
   const old=dialog.querySelector('#case-banner-image');old.hidden=true;old.removeAttribute('src');

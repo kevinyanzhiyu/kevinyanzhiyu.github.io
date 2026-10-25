@@ -10,7 +10,7 @@ html{scrollbar-gutter:stable}
 /* The same project image grows into the real banner, with constant pixel proportions. */
 .case-banner-art{position:absolute;inset:0;overflow:hidden;background:#25333e}
 #case-banner-image{display:none!important}
-.case-banner-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.case-banner-art img{display:block;width:100%;height:100%;object-fit:cover;object-position:var(--case-banner-position,50% 50%)}
 .case-banner-shade{pointer-events:none}
 .case-banner-copy{transition:none;animation:case-copy-in .45s cubic-bezier(.22,1,.36,1) both}
 .case-banner-copy h2{line-height:1.08}
