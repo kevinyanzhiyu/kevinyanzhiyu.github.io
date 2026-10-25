@@ -1,0 +1,62 @@
+/* One persistent category switch, scoped to the work section. */
+#work>.work-switch-bar,
+.hero-scroll-enabled #work>.work-switch-bar{position:sticky;top:12px;z-index:12;display:flex;justify-content:flex-start;align-items:center;min-height:60px;margin:0 0 32px;padding:0;border:0;transform:none}
+#work-title{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+.work-switch-bar .work-nav{display:flex;gap:4px;flex-wrap:nowrap;max-width:100%;padding:6px;border:1px solid #ffffffda;border-radius:999px;background:rgba(244,245,245,.88);box-shadow:0 8px 30px #2533460d,inset 0 1px #fff;backdrop-filter:blur(18px)}
+.work-switch-bar .work-nav.has-liquid-lens{position:relative;isolation:isolate;background:linear-gradient(145deg,#ffffffb8,#e7ebeea8);box-shadow:0 8px 26px #25334612,inset 0 1px 1px #fff,inset 0 -1px 2px #b4c0ce30}
+.work-switch-lens{position:absolute;left:0;z-index:0;border-radius:999px;pointer-events:none;overflow:hidden;transform-origin:left center;background:var(--ink);border:0;box-shadow:0 2px 5px #00000016}
+.work-switch-lens::before{content:none}
+.work-switch-lens i{position:absolute;inset:-30% -50%;opacity:0;transform:translateX(-55%);background:linear-gradient(105deg,transparent 25%,#ffffff08 48%,#ffffff14 50%,transparent 72%);pointer-events:none}
+.work-group{scroll-margin-top:96px}
+#ui-craft .gallery-toolbar{top:86px;z-index:10;scroll-margin-top:90px}
+/* Scroll arrivals use restrained masking and offset, not screenshot zooms. */
+#live-ops .project-card .project-media{clip-path:inset(0 round 18px);transition:opacity .7s ease var(--entry-delay,0ms),transform .85s cubic-bezier(.22,1,.36,1) var(--entry-delay,0ms),clip-path .85s cubic-bezier(.22,1,.36,1) var(--entry-delay,0ms),box-shadow .4s}
+#live-ops .project-card:not(.is-visible) .project-media{transform:translate3d(0,40px,0) scale(.98);clip-path:inset(10% 0 0 round 18px)}
+#live-ops .project-card:hover .project-media,#live-ops .project-media.card-tilt-active{transition-delay:0ms}
+.gallery-card,.gallery-standard-card{clip-path:inset(0);transition:opacity .7s ease var(--gallery-delay,0ms),transform .85s cubic-bezier(.22,1,.36,1) var(--gallery-delay,0ms),clip-path .85s cubic-bezier(.22,1,.36,1) var(--gallery-delay,0ms)}
+.gallery-card.gallery-pending,.gallery-standard-card.gallery-pending{opacity:0;transform:translateY(32px);clip-path:inset(7% 0 0)}
+@media(max-width:760px){
+ #work>.work-switch-bar,.hero-scroll-enabled #work>.work-switch-bar{top:8px;margin-bottom:24px;min-height:56px}
+ .work-switch-bar .work-nav{width:100%;padding:5px;gap:2px}
+ .work-switch-bar .work-nav a{flex:1;min-width:0;min-height:42px;padding:0 10px;font-size:13px}
+ #ui-craft .gallery-toolbar{top:76px}
+ .work-group{scroll-margin-top:84px}
+}
+html[data-motion="reduce"] .gallery-card,html[data-motion="reduce"] .gallery-standard-card,html[data-motion="reduce"] #live-ops .project-card .project-media{clip-path:none;transition:none}
+@media(prefers-reduced-motion:reduce){.gallery-card,.gallery-standard-card,#live-ops .project-card .project-media{clip-path:none;transition:none}}
+
+/* The gallery menu pushes the parent menu out of the same sticky slot. */
+#work>.work-switch-bar,.hero-scroll-enabled #work>.work-switch-bar{transform:translate3d(0,var(--switch-lift,0px),0);opacity:calc(var(--portal-label-opacity,1)*var(--switch-remaining,1));will-change:auto}
+#ui-craft .gallery-toolbar{top:12px;z-index:13;border-radius:999px;padding:6px;gap:10px;flex-wrap:nowrap;min-height:58px;background:linear-gradient(145deg,#ffffffd9,#e7ebeed4);border:1px solid #ffffffda;box-shadow:0 8px 26px #25334612,inset 0 1px 1px #fff,inset 0 -1px 2px #b4c0ce30;backdrop-filter:blur(18px) saturate(150%)}
+#ui-craft .gallery-filters{min-width:0;flex:1;display:flex;flex-wrap:nowrap;gap:4px;overflow-x:auto;scrollbar-width:none}
+#ui-craft .gallery-filters::-webkit-scrollbar{display:none}
+#ui-craft .gallery-count{flex-shrink:0;padding-right:16px}
+@media(max-width:760px){#ui-craft .gallery-toolbar{top:8px;min-height:54px;gap:4px;padding:5px}#ui-craft .gallery-filters button{min-height:42px;padding:0 14px}#ui-craft .gallery-count{display:none}}
+#ui-craft .gallery-filters.has-liquid-lens{position:relative;isolation:isolate}
+/* One state specification for the navigation links and gallery filter buttons. */
+.work-switch-bar .work-nav.has-liquid-lens>a,
+#ui-craft .gallery-filters.has-liquid-lens>button{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;flex-shrink:0;min-height:44px;padding:0 22px;border:0;border-radius:999px;background:transparent;box-shadow:none;backdrop-filter:none;color:#737a7d;font-size:14px;font-weight:700;line-height:22px;letter-spacing:.01em;white-space:nowrap;text-shadow:none;transform:none;transition:color .2s}
+.work-switch-bar .work-nav.has-liquid-lens>a:hover,
+#ui-craft .gallery-filters.has-liquid-lens>button:hover{background:transparent;box-shadow:none;color:#222c35;transform:none}
+.work-switch-bar .work-nav.has-liquid-lens>a[aria-current="location"],
+#ui-craft .gallery-filters.has-liquid-lens>button[aria-pressed="true"]{background:transparent;box-shadow:none;color:#fff;text-shadow:none}
+.work-switch-bar .work-nav.has-liquid-lens>a:focus-visible,
+#ui-craft .gallery-filters.has-liquid-lens>button:focus-visible{outline:2px solid #6b78af;outline-offset:-2px}
+.work-switch-bar .work-nav.has-liquid-lens,
+#ui-craft .gallery-toolbar{background:linear-gradient(145deg,#ffffffb8,#e7ebeea8);border:1px solid #ffffffda;box-shadow:0 8px 26px #25334612,inset 0 1px 1px #fff,inset 0 -1px 2px #b4c0ce30;backdrop-filter:blur(18px) saturate(150%)}
+@media(max-width:760px){.work-switch-bar .work-nav.has-liquid-lens>a,#ui-craft .gallery-filters.has-liquid-lens>button{min-height:42px;padding:0 10px;font-size:13px}}
+
+/* About keeps a direct route back to the work index, without replaying the cover. */
+.about-return-bar{position:sticky;top:12px;z-index:14;display:flex;align-items:center;min-height:58px;margin:0 0 32px;pointer-events:none}
+.about-return-work{display:inline-flex;align-items:center;gap:10px;min-height:46px;padding:0 22px;pointer-events:auto;border:1px solid #ffffffda;border-radius:999px;background:linear-gradient(145deg,#ffffffd9,#e7ebeed4);box-shadow:0 8px 26px #25334612,inset 0 1px 1px #fff;color:var(--ink);font-size:14px;line-height:22px;font-weight:700;backdrop-filter:blur(18px) saturate(150%);transition:background .2s,box-shadow .2s}
+.about-return-work:hover{background:#fff;box-shadow:0 8px 26px #2533461a}
+.about-return-work:focus-visible{outline:2px solid #6b78af;outline-offset:3px}
+.about-return-work>span{font-size:18px}
+/* Give the last work group and About one shared transition gap. */
+#work #ui-craft{padding-bottom:0;margin-bottom:0}
+#work{padding-bottom:32px}
+#about.personal-section{padding-top:32px}
+.case-nav .case-back,.case-nav .case-step-nav button,.case-nav .case-jump-wrap,.case-nav .case-jump-button{border-radius:999px}
+.case-nav .case-jump-menu{border-radius:26px;padding:8px}
+.case-nav .case-jump-option{border-radius:999px;padding-inline:16px}
+@media(max-width:760px){.about-return-bar{top:8px;margin-bottom:24px}.about-return-work{min-height:44px;padding:0 18px;font-size:13px}}

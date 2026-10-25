@@ -1,0 +1,37 @@
+/* Quiet, full-bleed project crops; all framing is provided by the actual work. */
+.project-media,.scene-card{container-type:inline-size}
+.cover-art{position:absolute;inset:0;overflow:hidden;isolation:isolate;background:#e8e9e7;pointer-events:none}
+.cover-visual{position:absolute;inset:0;overflow:hidden;transform:none;transition:transform .65s cubic-bezier(.22,1,.36,1)}
+.project-card .project-media .cover-visual img,.scene-card .cover-visual img,.case-flight .cover-visual img{position:absolute;inset:auto;left:var(--crop-x);top:var(--crop-y);width:var(--crop-width);height:var(--crop-height);max-width:none;object-fit:fill;border-radius:0;filter:none;transform:none}
+/* Keep the complete tall flag undistorted, with quiet blue space at either side. */
+.cover-art--alliance{background:#137fb3}
+.cover-art--alliance .cover-visual{inset:0 4.545455%}
+/* A small zoom preserves the editorial crop and never tilts the screenshot inside. */
+@media(hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference){
+ .project-card:hover .cover-visual{transform:scale(1.025)}
+}
+/* Ambient light provides continuity between editorial sections, without pinning. */
+#work,#about{isolation:isolate}
+.work-group,.personal-section{position:relative}
+.section-atmosphere{position:absolute;inset:-80px -4% -60px;z-index:-1;overflow:hidden;pointer-events:none;contain:paint}
+.section-atmosphere::before{content:"";position:absolute;left:26%;top:12%;width:68%;height:460px;border-radius:50%;background:radial-gradient(ellipse,#d9e2ed65,transparent 68%);transform:translate3d(0,var(--section-drift,0px),0);opacity:var(--section-light,.55)}
+#live-ops .section-atmosphere::before{left:-18%;background:radial-gradient(ellipse,#e9e1d365,transparent 68%)}
+#about .section-atmosphere::before{left:40%;top:0;background:radial-gradient(ellipse,#d6e1de70,transparent 68%)}
+.work-group>.group-head{transition:opacity .6s,transform .7s cubic-bezier(.22,1,.36,1)}
+.pointer-water{position:fixed;inset:0;z-index:8;pointer-events:none;overflow:hidden;contain:strict}
+.pointer-water i{position:absolute;left:0;top:0;width:80px;height:80px;border:1px solid #ffffffb8;border-radius:50%;box-shadow:0 0 0 5px #d4dfef12,inset 0 0 16px #ffffff45;pointer-events:none}
+/* Cloned cover lives inside the top-layer dialog during the spatial handoff. */
+.case-flight{position:fixed;z-index:20;overflow:hidden;pointer-events:none;transform-origin:0 0;container-type:inline-size;background:var(--paper,#f6f6f3)}
+.case-flight .project-media{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;aspect-ratio:auto!important;opacity:1!important;transform:none!important;border:0!important;border-radius:inherit!important;box-shadow:none!important;transition:none!important}
+.case-flight .project-open,.case-flight .project-video-label{display:none}
+.case-entering,.case-leaving{background:transparent}
+.case-entering::backdrop,.case-leaving::backdrop{background:transparent;backdrop-filter:none}
+.case-entering .case-shell,.case-entering .case-nav{animation:case-shell-in .78s both}
+@keyframes case-shell-in{0%,55%{opacity:0}100%{opacity:1}}
+.case-entering .case-banner-copy{opacity:0;transform:translateY(16px);transition:none}
+.case-banner-copy{transition:opacity .5s ease,transform .65s cubic-bezier(.22,1,.36,1)}
+.case-entering .case-overview{opacity:0;transform:translateY(20px);transition:none}
+.case-overview{transition:opacity .55s ease,transform .7s cubic-bezier(.22,1,.36,1)}
+.case-leaving .case-shell,.case-leaving .case-nav{opacity:0;transition:opacity .25s}
+@media(max-width:760px){.pointer-water{display:none}.section-atmosphere::before{height:320px}}
+@media(prefers-reduced-motion:reduce){.pointer-water{display:none}.cover-visual,.case-banner-copy,.case-overview,.work-group>.group-head{transition:none!important}.project-card:hover .cover-visual{transform:none}.section-atmosphere::before{transform:none!important}.case-entering .case-banner-copy,.case-entering .case-overview{opacity:1;transform:none}}

@@ -1,0 +1,41 @@
+/* Scroll owns transform; idle drift uses the independent rotate/translate channels. */
+.hero-scroll-enabled .hero-glass{
+  transform:translate3d(calc(var(--move-x,0px)*-.65),calc(var(--move-y,0px)*-.55),0) rotate(var(--halo-rotation,-24deg)) rotateX(calc(var(--halo-pitch,20deg) - var(--cover-rotate-x,0deg)*1.4)) rotateY(calc(var(--halo-yaw,-16deg) - var(--cover-rotate-y,0deg)*1.4)) scale(var(--halo-scale,1));
+  transform-origin:50% 50%;
+  animation:halo-hover 10s ease-in-out infinite alternate;
+  border-color:rgba(255,255,255,.94);
+  background:linear-gradient(135deg,rgba(255,255,255,.64),rgba(255,255,255,.035) 43%,rgba(159,185,221,.2) 73%,rgba(255,255,255,.7));
+  box-shadow:inset 10px 12px 22px #ffffffdd,inset -12px -16px 28px #788dae32,0 28px 60px #44567816;
+  backdrop-filter:none;
+}
+@keyframes halo-hover{
+  from{rotate:1 .4 0 -12deg;translate:0 -8px}
+  to{rotate:.3 1 0 14deg;translate:0 8px}
+}
+.hero-scroll-enabled .hero-glass-inner{
+  transform:translate3d(0,var(--halo-inner-y,0%),0) scale(var(--halo-inner-scale,1));
+  opacity:var(--halo-inner-opacity,1);transform-origin:50% 50%;
+  border-color:rgba(255,255,255,.85);
+  background:linear-gradient(145deg,#bcc9df0e,#ffffff35);
+  box-shadow:inset 5px 6px 15px #7b8fac14,0 1px 9px #ffffffbb;
+  will-change:transform,opacity;
+}
+.halo-rim-light{position:absolute;inset:-2px;padding:3px;overflow:hidden;border-radius:inherit;pointer-events:none;
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);mask-composite:exclude;
+}
+.halo-rim-light>span{position:absolute;inset:-50%;
+  background:conic-gradient(from 20deg,transparent 0deg,#ffffff08 35deg,#fff 66deg,#d5e6ffcc 84deg,transparent 112deg,transparent 198deg,#ffffffed 235deg,#aecbf580 252deg,transparent 280deg);
+  transform:rotate(var(--halo-light-turn,0deg));animation:halo-light-flow 20s linear infinite;will-change:rotate;
+}
+.halo-rim-light--inner{padding:2px;opacity:.8}
+.halo-rim-light--inner>span{animation-duration:26s;animation-direction:reverse}
+@keyframes halo-light-flow{from{rotate:0deg}to{rotate:360deg}}
+.halo-travelling .hero-glass{animation-play-state:paused}
+.halo-finished .hero-glass,.halo-offscreen .hero-glass,.halo-hidden .hero-glass,
+.halo-finished .halo-rim-light>span,.halo-offscreen .halo-rim-light>span,.halo-hidden .halo-rim-light>span{animation-play-state:paused}
+@media(max-width:760px){.halo-rim-light{padding:2px}.hero-scroll-enabled .hero-glass{animation-duration:18s;box-shadow:inset 8px 10px 18px #ffffffcc,inset -8px -12px 20px #788dae24,0 20px 40px #44567810}}
+html[data-motion="reduce"] .hero-glass,html[data-motion="reduce"] .hero-glass-inner,html[data-motion="reduce"] .halo-rim-light>span{animation:none!important;rotate:none;translate:none;will-change:auto}
+html[data-motion="reduce"] .hero-glass-inner{transform:none;opacity:1}
+html[data-motion="reduce"] .halo-rim-light{opacity:.4}
+@media(prefers-reduced-motion:reduce){.hero-glass,.hero-glass-inner,.halo-rim-light>span{animation:none!important;rotate:none;translate:none;will-change:auto}}

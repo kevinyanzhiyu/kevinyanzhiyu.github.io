@@ -1,0 +1,6 @@
+/* The cover handoff finishes before its individual text rows enter. */
+.case-dialog.case-sequenced .case-banner-copy{animation:none!important;transition:none}
+.case-entry-pending{opacity:0;transform:translate3d(0,22px,0);pointer-events:none}
+.case-entry-pending:focus-within{opacity:1;transform:none;pointer-events:auto}
+html[data-motion="reduce"] .case-entry-pending{opacity:1;transform:none;pointer-events:auto}
+@media(prefers-reduced-motion:reduce){.case-entry-pending{opacity:1;transform:none;pointer-events:auto}}
